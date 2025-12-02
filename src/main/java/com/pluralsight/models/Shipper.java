@@ -25,6 +25,6 @@ public class Shipper {
 
     @Override
     public String toString() {
-        return String.format("%-9d %-40s %-24s", shipperID, companyName, phoneNumber);
+        return String.format("%-10d %-40s %-24s", shipperID, companyName, phoneNumber);
     }
 }

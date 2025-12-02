@@ -62,7 +62,7 @@ public class Main {
     public static void displayAllShippers(ShippersDAO shippersDAO) {
         List<Shipper> shipperList = shippersDAO.displayAllShippers();
         if (!shipperList.isEmpty()) {
-            System.out.println("\nShipper ID " + "Company Name" + " ".repeat(11) + "Phone Number");
+            System.out.println("\nShipper ID " + "Company Name" + " ".repeat(29) + "Phone Number");
             System.out.println("---------- " + "-".repeat(40) + " " + "-".repeat(24));
             shipperList.forEach(System.out::println);
         } else {
