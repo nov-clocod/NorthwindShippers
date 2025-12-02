@@ -6,6 +6,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,12 +26,18 @@ public class ShippersDAO {
 
             try (Connection connection = dataSource.getConnection();
 
-                 PreparedStatement preparedStatement = connection.prepareStatement(query)
+                 PreparedStatement preparedStatement = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)
             ) {
                 preparedStatement.setString(1, companyName);
                 preparedStatement.setString(2, companyPhoneNumber);
 
                 preparedStatement.executeUpdate();
+
+                try (ResultSet key = preparedStatement.getGeneratedKeys()) {
+                    if (key.next()) {
+                        System.out.println("A new key was added: " + key.getInt(1));
+                    }
+                }
             }
         } catch (Exception ex) {
             System.out.println("Error occurred!");
