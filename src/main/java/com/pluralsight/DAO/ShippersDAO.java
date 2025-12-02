@@ -67,6 +67,29 @@ public class ShippersDAO {
         return allShippers;
     }
 
+    public void updateShipperContactNumber(String newPhoneNumber, int shipperID) {
+        try {
+            String query = """
+                    UPDATE shippers
+                    SET Phone = ?
+                    WHERE ShipperID = ?
+                    """;
+
+            try (Connection connection = dataSource.getConnection();
+
+                 PreparedStatement preparedStatement = connection.prepareStatement(query)
+            ) {
+                preparedStatement.setString(1, newPhoneNumber);
+                preparedStatement.setInt(2, shipperID);
+
+                preparedStatement.executeUpdate();
+            }
+        } catch (Exception ex) {
+            System.out.println("Error occurred!");
+            System.out.println(ex.getMessage());
+        }
+    }
+
     public void deleteShipper(int shipperID) {
         try {
             String query = """
